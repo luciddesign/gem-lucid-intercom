@@ -1,17 +1,15 @@
 $: << "#{__dir__}/lib"
 
-require 'lucid_intercom/version'
+require 'lucid/intercom/version'
 
 Gem::Specification.new do |s|
-  s.name = 'lucid-intercom'
-  s.version = Lucid::Intercom::VERSION
-  s.license = 'ISC'
+  s.add_development_dependency 'rspec', '~> 3.6.0'
   s.author = 'Kelsey Judson'
   s.email = 'kelsey@lucid.co.nz'
-  s.summary = 'Lucid integration for Intercom'
+  s.files = Dir.glob('lib/**/*') + %w(README.md)
   s.homepage = 'https://github.com/luciddesign/lucid-intercom'
-
-  s.files = Dir.glob('lib/**/*') + [
-    'README.md'
-  ]
+  s.license = 'ISC'
+  s.name = 'lucid-intercom'
+  s.summary = 'Lucid integration for Intercom'
+  s.version = Lucid::Intercom::VERSION
 end

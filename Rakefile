@@ -1,6 +1,6 @@
 $: << "#{__dir__}/lib"
 
-require 'lucid_intercom/version'
+require 'lucid/intercom/version'
 
 task :default => :build
 
