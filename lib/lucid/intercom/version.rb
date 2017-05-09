@@ -1,5 +1,5 @@
 module Lucid
-  module Intercom
+  class Intercom
     VERSION = '0.0.1'.freeze
   end
 end
