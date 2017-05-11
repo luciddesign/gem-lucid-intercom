@@ -34,7 +34,11 @@ module Lucid
       # Quote and escape a value for the window.intercomSettings object.
       #
       private def h(v)
-        v.is_a?(String) ? "\"#{ERB::Util.h(v)}\"" : v
+        v.is_a?(String) ? ?" + v.gsub(/./) { |c| escape_char(c) } + ?" : v
+      end
+
+      private def escape_char(c)
+        %w(" ' / < > \\).include?(c) ? '\%s' % c : c
       end
     end
   end
