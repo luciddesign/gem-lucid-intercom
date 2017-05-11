@@ -49,6 +49,9 @@ module Lucid
         end
       end
 
+      #
+      # Standard Intercom attributes.
+      #
       private def attributes
         {
           # user_hash: '',
@@ -58,15 +61,22 @@ module Lucid
         }
       end
 
+      #
+      # These custom attributes are prefixed with 'merchant_' to distinguish
+      # from the Shopify intergration's 'shopify_' prefix.
+      #
       private def custom_shopify_attributes
         {
-          shopify_domain: shop_attributes['domain'],
-          shopify_myshopify_domain: shop_attributes['myshopify_domain'],
-          shopify_shop_owner: shop_attributes['shop_owner'],
-          shopify_timezone: shop_attributes['timezone']
+          merchant_domain: shop_attributes['domain'],
+          merchant_myshopify_domain: shop_attributes['myshopify_domain'],
+          merchant_shop_owner: shop_attributes['shop_owner'],
+          merchant_timezone: shop_attributes['timezone']
         }
       end
 
+      #
+      # Anything app-specific.
+      #
       private def custom_app_attributes
         app_attributes.each_with_object({}) do |(k, v), h|
           h["#{Lucid::Intercom::APP_PREFIX}_#{k}"] = v
