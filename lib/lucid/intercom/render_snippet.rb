@@ -8,24 +8,32 @@ module Lucid
     class RenderSnippet
       TEMPLATE = ERB.new(File.read("#{__dir__}/snippet.html.erb")).freeze
 
+      attr_reader :attributes
+
       #
       # Leave arguments unset for unauthenticated visitors.
       #
       # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
       # @param app_attributes [Hash] app-specific attributes (unprefixed)
       #
-      # @return [String] the rendered tracking script HTML
-      #
-      def call(shop_attributes = {}, app_attributes = {})
-        attributes = shop_attributes.empty? ? {} : Attributes.new(
+      def initialize(shop_attributes = {}, app_attributes = {})
+        @attributes = shop_attributes.empty? ? nil : Attributes.new(
           shop_attributes,
           app_attributes
-        ).for_browser
+        )
+      end
 
+      #
+      # @return [String] the rendered HTML
+      #
+      def call
         TEMPLATE.result(binding)
       end
 
-      private def render_attribute(v)
+      #
+      # Quote and escape a value for the window.intercomSettings object.
+      #
+      private def h(v)
         v.is_a?(String) ? "\"#{ERB::Util.h(v)}\"" : v
       end
     end

@@ -15,57 +15,53 @@ module Lucid
       end
 
       #
-      # Attributes structured for API requests. Custom attributes are nested.
+      # Standard Intercom user attributes.
       #
-      # @return [Hash]
-      #
-      def for_api
-        a = attributes.merge(custom_attributes: custom_attributes)
-
-        normalize(a)
+      def user
+        normalize(
+          # NOTE: currently unused # user_hash: '',
+          # NOTE: currently unused # user_id: shop_attributes['myshopify_domain'],
+          email: shop_attributes['email'],
+          name: shop_attributes['shop_owner']
+        )
       end
 
       #
-      # Attributes structured for browser snippet. Values are escaped.
+      # Convert values to valid Intercom types.
       #
-      # @return [Hash]
-      #
-      def for_browser
-        a = attributes.merge(custom_attributes)
-
-        normalize(a)
-      end
-
-      alias_method :call, :for_api
-
-      private def normalize(a)
-        a.each_with_object({}) do |(k, v), h|
-          h[k] = case v
-          when Hash then normalize(v)
+      private def normalize(attributes)
+        attributes.each_with_object({}) do |(k, v), attributes2|
+          v2 = case v
           when Time then v.to_i
           when Integer, Float then v
           else v.to_s
           end
+
+          attributes2[k] = v2
         end
       end
 
       #
-      # Standard Intercom attributes.
+      # Standard Intercom company attributes.
       #
-      private def attributes
-        {
-          # user_hash: '',
-          user_id: shop_attributes['myshopify_domain'],
-          email: shop_attributes['email'],
+      def company
+        normalize(
+          company_id: shop_attributes['myshopify_domain'],
           name: shop_attributes['name']
-        }
+        )
+      end
+
+      def custom
+        normalize(
+          custom_shopify.merge(custom_app)
+        )
       end
 
       #
       # These custom attributes are prefixed with 'merchant_' to distinguish
       # from the Shopify intergration's 'shopify_' prefix.
       #
-      private def custom_shopify_attributes
+      private def custom_shopify
         {
           merchant_domain: shop_attributes['domain'],
           merchant_myshopify_domain: shop_attributes['myshopify_domain'],
@@ -77,14 +73,10 @@ module Lucid
       #
       # Anything app-specific.
       #
-      private def custom_app_attributes
-        app_attributes.each_with_object({}) do |(k, v), h|
-          h["#{Lucid::Intercom::APP_PREFIX}_#{k}"] = v
+      private def custom_app
+        app_attributes.each_with_object({}) do |(k, v), attributes|
+          attributes["#{Lucid::Intercom::APP_PREFIX}_#{k}"] = v
         end
-      end
-
-      private def custom_attributes
-        custom_shopify_attributes.merge(custom_app_attributes)
       end
     end
   end

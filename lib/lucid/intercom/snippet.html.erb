@@ -1,7 +1,19 @@
 <script id='IntercomSettingsScriptTag'>
   window.intercomSettings = {
-    <% attributes.each do |k, v| %>
-      <%= k %>: <%= render_attribute(v) %>,
+    <% if attributes %>
+      <% attributes.user.each do |k, v| %>
+        <%= k %>: <%= h v %>,
+      <% end %>
+
+      company: {
+        <% attributes.company.each do |k, v| %>
+          <%= k %>: <%= h v %>,
+        <% end %>
+
+        <% attributes.custom.each do |k, v| %>
+          <%= k %>: <%= h v %>,
+        <% end %>
+      }
     <% end %>
 
     app_id: "<%= Lucid::Intercom::APP_ID %>"
