@@ -45,23 +45,13 @@ user will be created.
 
 ### Send an event
 
-When a user installs the app:
+When a user installs/uninstalls the app, or changes their plan:
 
-    require 'lucid/intercom/events/installed'
+    require 'lucid/intercom/events'
 
-    Lucid::Intercom::Events::Installed.new(shop_attributes).()
-
-When a user uninstalls the app:
-
-    require 'lucid/intercom/events/uninstalled'
-
+    Lucid::Intercom::Events::Installed.new(shop_attributes).(plan_name)
     Lucid::Intercom::Events::Uninstalled.new(shop_attributes).()
-
-When a user changes their app plan:
-
-    require 'lucid/intercom/events/changed_plan'
-
-    Lucid::Intercom::Events::ChangedPlan.new(shop_attributes, new_plan).()
+    Lucid::Intercom::Events::ChangedPlan.new(shop_attributes).(plan_name)
 
 To send a custom event:
 
