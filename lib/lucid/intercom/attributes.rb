@@ -1,4 +1,6 @@
-require_relative '../intercom'
+require_relative './attributes/user'
+require_relative './attributes/company'
+require_relative './attributes/custom'
 
 module Lucid
   class Intercom
@@ -15,68 +17,35 @@ module Lucid
       end
 
       #
-      # Standard Intercom user attributes.
+      # @return [Hash]
       #
       def user
-        normalize(
-          # NOTE: currently unused # user_hash: '',
-          # NOTE: currently unused # user_id: shop_attributes['myshopify_domain'],
-          email: shop_attributes['email'],
-          name: shop_attributes['shop_owner']
-        )
+        User.new(shop_attributes, app_attributes).()
       end
 
       #
-      # Convert values to valid Intercom types.
-      #
-      private def normalize(attributes)
-        attributes.each_with_object({}) do |(k, v), attributes2|
-          v2 = case v
-          when Time then v.to_i
-          when Integer, Float then v
-          else v.to_s
-          end
-
-          attributes2[k] = v2
-        end
-      end
-
-      #
-      # Standard Intercom company attributes.
+      # @return [Hash]
       #
       def company
-        normalize(
-          company_id: shop_attributes['myshopify_domain'],
-          name: shop_attributes['name']
-        )
+        Company.new(shop_attributes, app_attributes).()
       end
 
+      #
+      # Company attributes for browser (expects 'id', not 'company_id').
+      #
+      # @return [Hash]
+      #
+      def company_browser
+        company2 = company
+        company2[:id] = company2.delete(:company_id)
+        company2
+      end
+
+      #
+      # @return [Hash]
+      #
       def custom
-        normalize(
-          custom_shopify.merge(custom_app)
-        )
-      end
-
-      #
-      # These custom attributes are prefixed with 'merchant_' to distinguish
-      # from the Shopify intergration's 'shopify_' prefix.
-      #
-      private def custom_shopify
-        {
-          merchant_domain: shop_attributes['domain'],
-          merchant_myshopify_domain: shop_attributes['myshopify_domain'],
-          merchant_shop_owner: shop_attributes['shop_owner'],
-          merchant_timezone: shop_attributes['timezone']
-        }
-      end
-
-      #
-      # Anything app-specific.
-      #
-      private def custom_app
-        app_attributes.each_with_object({}) do |(k, v), attributes|
-          attributes["#{Lucid::Intercom::APP_PREFIX}_#{k}"] = v
-        end
+        Custom.new(shop_attributes, app_attributes).()
       end
     end
   end
