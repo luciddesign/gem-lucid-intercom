@@ -4,7 +4,7 @@ require_relative '../intercom'
 require_relative './attributes'
 
 module Lucid
-  class Intercom
+  module Intercom
     class RenderSnippet
       TEMPLATE = ERB.new(File.read("#{__dir__}/snippet.html.erb")).freeze
 

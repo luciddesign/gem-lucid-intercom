@@ -1,5 +1,5 @@
 module Lucid
-  class Intercom
+  module Intercom
     class Attributes
       class Base
         attr_reader :shop_attributes, :app_attributes
@@ -38,8 +38,9 @@ module Lucid
           attributes.each_with_object({}) do |(k, v), a|
             v2 =
               case v
-              when Time then v.to_i
               when Integer, Float then v
+              when Time then v.to_i
+              when nil then nil # unset attribute
               else v.to_s
               end
 

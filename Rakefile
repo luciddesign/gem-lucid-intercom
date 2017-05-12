@@ -2,13 +2,13 @@ $: << "#{__dir__}/lib"
 
 require 'lucid/intercom/version'
 
-task :default => :build
+task default: :build
 
 task :build do
   system 'gem build lucid-intercom.gemspec'
 end
 
-task :install => :build do
+task install: :build do
   system "gem install lucid-intercom-#{Lucid::Intercom::VERSION}.gem"
 end
 

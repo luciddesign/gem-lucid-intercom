@@ -2,7 +2,7 @@ require_relative '../../intercom'
 require_relative './base'
 
 module Lucid
-  class Intercom
+  module Intercom
     class Attributes
       class Custom < Base
         #

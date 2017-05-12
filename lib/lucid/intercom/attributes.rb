@@ -3,7 +3,7 @@ require_relative './attributes/company'
 require_relative './attributes/custom'
 
 module Lucid
-  class Intercom
+  module Intercom
     class Attributes
       attr_reader :shop_attributes, :app_attributes
 
