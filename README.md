@@ -33,16 +33,6 @@ This returns an HTML string which you can use in your view layout.
 See the source code for documentation of arguments.
 
 
-### Update a user
-
-    require 'lucid/intercom/update_user'
-
-    Lucid::Intercom::UpdateUser.new(shop_attributes, app_attributes).()
-
-When this is called, and the user did not previously exist, the
-user will be created.
-
-
 ### Send an event
 
 When a user installs/uninstalls the app, or changes their plan:
@@ -60,3 +50,13 @@ To send a custom event:
     Lucid::Intercom::SendEvent.new(shop_attributes).(event_name, event_metadata)
 
 See the source code for documentation of arguments.
+
+
+### Update a user
+
+    require 'lucid/intercom/update_user'
+
+    Lucid::Intercom::UpdateUser.new(shop_attributes, app_attributes).()
+
+When this is called, and the user did not previously exist, the
+user will be created.
