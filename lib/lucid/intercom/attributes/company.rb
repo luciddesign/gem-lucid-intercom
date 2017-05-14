@@ -12,7 +12,8 @@ module Lucid
         private def attributes
           {
             company_id: shop_attributes['myshopify_domain'],
-            name: shop_attributes['name']
+            name: shop_attributes['name'],
+            plan: shop_attributes['plan_name']
           }
         end
       end
