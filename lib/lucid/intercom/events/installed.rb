@@ -25,7 +25,7 @@ module Lucid
         #
         # @return [Hash]
         #
-        private def event_metadata
+        private def event_metadata(plan_name)
           {
             company_id: shop_attributes['myshopify_domain'],
             new_plan: plan_name
