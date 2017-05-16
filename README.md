@@ -45,9 +45,19 @@ When a user installs/uninstalls the app, or changes their plan:
     Lucid::Intercom::Events::Uninstalled.new(shop_attributes).()
     Lucid::Intercom::Events::ChangedPlan.new(shop_attributes).(plan_name)
 
-For partner-friendly app installs, use ‘partner’ as the plan name.
 
-To send a custom event:
+### Plan names
+
+For installed apps, yet to subscribe to a plan, use ‘pending’.
+
+For apps with a single paid plan, use ‘subscribed’.
+
+For free apps, use ‘free’.
+
+For partner-friendly app installs, use ‘partner’.
+
+
+### Send a custom event
 
     require 'lucid/intercom/send_event'
 
