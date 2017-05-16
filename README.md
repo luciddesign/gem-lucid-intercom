@@ -4,9 +4,11 @@ lucid-intercom
 Installation
 ------------
 
-Add the following line to your ‘Gemfile’:
+Add the following lines to your ‘Gemfile’:
 
-    gem 'lucid-intercom', github: 'luciddesign/gem-lucid-intercom'
+    git_source :lucid { |r| "https://github.com/luciddesign/gem-#{r}.git" }
+
+    gem 'lucid-intercom', lucid: 'lucid-intercom'
 
 
 Configuration
