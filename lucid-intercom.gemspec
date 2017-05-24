@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.author = 'Kelsey Judson'
   s.email = 'kelsey@lucid.co.nz'
   s.files = Dir.glob('lib/**/*') + %w(README.md)
-  s.homepage = 'https://github.com/luciddesign/lucid-intercom'
+  s.homepage = 'https://github.com/lucidnz/gem-lucid-intercom'
   s.license = 'ISC'
   s.name = 'lucid-intercom'
   s.summary = 'Lucid integration for Intercom'
