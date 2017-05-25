@@ -1,7 +1,7 @@
 <script>
   window.intercomSettings = {
     <% if attributes %>
-      <% attributes.user.each do |k, v| %>
+      <% attributes.user_browser.each do |k, v| %>
         <%= k %>: <%= h v %>,
       <% end %>
 

@@ -20,6 +20,17 @@ module Lucid
       # @return [Hash]
       #
       def user
+        user_browser.select do |k, _|
+          k != :user_hash
+        end
+      end
+
+      #
+      # User attributes for browser (with 'user_hash').
+      #
+      # @return [Hash]
+      #
+      def user_browser
         User.new(shop_attributes, app_attributes).()
       end
 
