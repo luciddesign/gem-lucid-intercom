@@ -19,7 +19,7 @@ module Lucid
       end
 
       #
-      # Create or update user identified by attributes.
+      # Send event for user identified by attributes.
       #
       # @param event_name [String]
       # @param event_metadata [Hash]

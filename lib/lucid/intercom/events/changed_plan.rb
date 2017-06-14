@@ -10,8 +10,8 @@ module Lucid
         # @param plan_name [String, nil] e.g. 'free', or nil to unset
         #
         def call(plan_name)
-          Lucid::Intercom::SendEvent.new(shop_attributes).(event_name, event_metadata(plan_name))
           Lucid::Intercom::UpdateUser.new(shop_attributes, {plan: plan_name}).()
+          Lucid::Intercom::SendEvent.new(shop_attributes).(event_name, event_metadata(plan_name))
         end
 
         #
