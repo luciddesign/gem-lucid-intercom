@@ -29,8 +29,10 @@ module Lucid
           http.request(req, data)
         end
 
-        if res.code.to_i >= 400
-          raise Lucid::Intercom::RequestError.new(res.code), 'invalid response code %s' % res.code.to_i
+        status = res.code.to_i
+
+        if status >= 400
+          raise Lucid::Intercom::RequestError.new(status), 'invalid response code %s' % status
         end
       end
 
