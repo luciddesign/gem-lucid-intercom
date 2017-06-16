@@ -1,6 +1,8 @@
+require_relative './error'
+
 module Lucid
   module Intercom
-    class RequestError < StandardError
+    class RequestError < Error
       attr_reader :status
 
       #
