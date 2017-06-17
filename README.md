@@ -47,6 +47,11 @@ When a user installs/uninstalls the app, or changes their plan:
     Lucid::Intercom::Events::Uninstalled.new(shop_attributes).()
     Lucid::Intercom::Events::ChangedPlan.new(shop_attributes).(plan_name)
 
+Note that the `shop_attributes` hash for uninstalled events cannot
+be read from the API (as the access token is invalid at this stage).
+You should use the data hash provided with Shopify’s ‘app/uninstalled’
+webhook instead.
+
 
 ### Plan names
 
