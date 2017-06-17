@@ -21,6 +21,7 @@ Configuration
 * Set ‘INTERCOM_APP_ACCESS_TOKEN’ to the Intercom app access token
 * Set ‘INTERCOM_APP_ID’ to the Intercom app ID
 * Set ‘INTERCOM_APP_PREFIX’ to the snakecased app name, e.g. ‘smart_order_tags’
+* Set ‘INTERCOM_APP_SECRET’ to the Intercom app secret (for ‘user_hash’)
 
 
 Usage
