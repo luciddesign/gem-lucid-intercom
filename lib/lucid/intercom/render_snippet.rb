@@ -1,5 +1,6 @@
 require 'erb'
 
+require_relative '../intercom'
 require_relative './attributes'
 
 module Lucid
