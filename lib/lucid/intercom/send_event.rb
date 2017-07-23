@@ -9,9 +9,6 @@ require_relative './errors'
 module Lucid
   module Intercom
     class SendEvent
-      attr_reader :attributes
-      attr_reader :credentials
-
       #
       # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
       # @param credentials [Lucid::Intercom::Credentials]
@@ -21,6 +18,9 @@ module Lucid
 
         @attributes = Attributes.new(shop_attributes, {}, credentials: @credentials)
       end
+
+      attr_reader :attributes
+      attr_reader :credentials
 
       #
       # Send event for user identified by attributes.

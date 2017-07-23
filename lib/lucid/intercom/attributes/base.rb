@@ -4,10 +4,6 @@ module Lucid
   module Intercom
     class Attributes
       class Base
-        attr_reader :shop_attributes
-        attr_reader :app_attributes
-        attr_reader :credentials
-
         #
         # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
         # @param app_attributes [Hash] app-specific attributes (unprefixed)
@@ -19,6 +15,10 @@ module Lucid
           @shop_attributes = shop_attributes
           @app_attributes = app_attributes
         end
+
+        attr_reader :shop_attributes
+        attr_reader :app_attributes
+        attr_reader :credentials
 
         #
         # @return [Hash]

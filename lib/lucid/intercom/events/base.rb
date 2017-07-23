@@ -4,9 +4,6 @@ module Lucid
   module Intercom
     module Events
       class Base
-        attr_reader :shop_attributes
-        attr_reader :credentials
-
         #
         # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
         # @param credentials [Lucid::Intercom::Credentials]
@@ -16,6 +13,9 @@ module Lucid
 
           @shop_attributes = shop_attributes
         end
+
+        attr_reader :shop_attributes
+        attr_reader :credentials
       end
     end
   end

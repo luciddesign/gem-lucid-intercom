@@ -9,9 +9,6 @@ require_relative './errors'
 module Lucid
   module Intercom
     class UpdateUser
-      attr_reader :attributes
-      attr_reader :credentials
-
       #
       # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
       # @param app_attributes [Hash] app-specific attributes (unprefixed)
@@ -22,6 +19,9 @@ module Lucid
 
         @attributes = Attributes.new(shop_attributes, app_attributes, credentials: @credentials)
       end
+
+      attr_reader :attributes
+      attr_reader :credentials
 
       #
       # Create or update user identified by attributes.
