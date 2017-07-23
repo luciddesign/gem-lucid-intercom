@@ -10,12 +10,16 @@ module Lucid
   module Intercom
     class SendEvent
       attr_reader :attributes
+      attr_reader :credentials
 
       #
       # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
+      # @param credentials [Lucid::Intercom::Credentials]
       #
-      def initialize(shop_attributes)
-        @attributes = Attributes.new(shop_attributes, {})
+      def initialize(shop_attributes, credentials: nil)
+        @credentials = credentials || Lucid::Intercom.credentials
+
+        @attributes = Attributes.new(shop_attributes, {}, credentials: @credentials)
       end
 
       #
@@ -50,7 +54,7 @@ module Lucid
       #
       private def req
         req = Net::HTTP::Post.new(uri)
-        req['Authorization'] = "Bearer #{Lucid::Intercom::APP_ACCESS_TOKEN}"
+        req['Authorization'] = "Bearer #{credentials.access_token}"
         req['Content-Type'] = 'application/json'
 
         req

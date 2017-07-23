@@ -5,24 +5,18 @@ require_relative './attributes/custom'
 module Lucid
   module Intercom
     class Attributes
-      attr_reader :shop_attributes, :app_attributes
-
       #
-      # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
-      # @param app_attributes [Hash] app-specific attributes (unprefixed)
+      # @see Lucid::Intercom::Attributes::Base#initialize
       #
-      def initialize(shop_attributes, app_attributes)
-        @shop_attributes = shop_attributes
-        @app_attributes = app_attributes
+      def initialize(*args)
+        @args = args
       end
 
       #
       # @return [Hash]
       #
       def user
-        user_browser.select do |k, _|
-          k != :user_hash
-        end
+        user_browser.select { |k, _| k != :user_hash }
       end
 
       #
@@ -31,14 +25,14 @@ module Lucid
       # @return [Hash]
       #
       def user_browser
-        User.new(shop_attributes, app_attributes).()
+        User.new(*@args).()
       end
 
       #
       # @return [Hash]
       #
       def company
-        Company.new(shop_attributes, app_attributes).()
+        Company.new(*@args).()
       end
 
       #
@@ -56,7 +50,7 @@ module Lucid
       # @return [Hash]
       #
       def custom
-        Custom.new(shop_attributes, app_attributes).()
+        Custom.new(*@args).()
       end
     end
   end

@@ -1,6 +1,5 @@
 require 'erb'
 
-require_relative '../intercom'
 require_relative './attributes'
 
 module Lucid
@@ -9,18 +8,17 @@ module Lucid
       TEMPLATE = ERB.new(File.read("#{__dir__}/snippet.html.erb")).freeze
 
       attr_reader :attributes
+      attr_reader :credentials
 
       #
       # Leave arguments unset for unauthenticated visitors.
       #
-      # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
-      # @param app_attributes [Hash] app-specific attributes (unprefixed)
+      # @see Lucid::Intercom::Attributes#initialize
       #
-      def initialize(shop_attributes = {}, app_attributes = {})
-        @attributes = shop_attributes.empty? ? nil : Attributes.new(
-          shop_attributes,
-          app_attributes
-        )
+      def initialize(*args, credentials: nil)
+        @credentials = credentials || Lucid::Intercom.credentials
+
+        @attributes = args[0].empty? ? nil : Attributes.new(*args, credentials: @credentials)
       end
 
       #

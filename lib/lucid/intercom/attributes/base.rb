@@ -1,14 +1,21 @@
+require_relative '../../intercom'
+
 module Lucid
   module Intercom
     class Attributes
       class Base
-        attr_reader :shop_attributes, :app_attributes
+        attr_reader :shop_attributes
+        attr_reader :app_attributes
+        attr_reader :credentials
 
         #
         # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
         # @param app_attributes [Hash] app-specific attributes (unprefixed)
+        # @param credentials [Lucid::Intercom::Credentials]
         #
-        def initialize(shop_attributes, app_attributes)
+        def initialize(shop_attributes = {}, app_attributes = {}, credentials: nil)
+          @credentials = credentials || Lucid::Intercom.credentials
+
           @shop_attributes = shop_attributes
           @app_attributes = app_attributes
         end

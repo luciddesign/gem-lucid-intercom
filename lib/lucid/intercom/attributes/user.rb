@@ -21,7 +21,7 @@ module Lucid
         end
 
         private def user_hash(email)
-          OpenSSL::HMAC.hexdigest('sha256', Lucid::Intercom::APP_SECRET, email)
+          OpenSSL::HMAC.hexdigest('sha256', credentials.secret, email)
         end
       end
     end

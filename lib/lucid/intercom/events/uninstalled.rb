@@ -7,15 +7,15 @@ module Lucid
     module Events
       class Uninstalled < Base
         def call
-          Lucid::Intercom::UpdateUser.new(shop_attributes, {plan: nil}).()
-          Lucid::Intercom::SendEvent.new(shop_attributes).(event_name, event_metadata)
+          Lucid::Intercom::UpdateUser.new(shop_attributes, {plan: nil}, credentials: credentials).()
+          Lucid::Intercom::SendEvent.new(shop_attributes, credentials: credentials).(event_name, event_metadata)
         end
 
         #
         # @return [String]
         #
         private def event_name
-          "#{Lucid::Intercom::APP_PREFIX}_uninstalled"
+          "#{credentials.app_prefix}_uninstalled"
         end
 
         #

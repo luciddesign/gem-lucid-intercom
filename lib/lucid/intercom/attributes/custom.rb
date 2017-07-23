@@ -37,10 +37,8 @@ module Lucid
         # @return [Hash]
         #
         private def attributes_app
-          app_prefix = Lucid::Intercom::APP_PREFIX
-
           app_attributes.each_with_object({}) do |(k, v), a|
-            a["#{app_prefix}_#{k}"] = v
+            a["#{credentials.app_prefix}_#{k}"] = v
           end
         end
       end
