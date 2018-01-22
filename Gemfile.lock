@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lucid_intercom (0.3.0)
+    lucid_intercom (0.3.2)
 
 GEM
   remote: https://rubygems.org/
