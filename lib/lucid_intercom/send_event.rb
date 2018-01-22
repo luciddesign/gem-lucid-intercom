@@ -1,9 +1,9 @@
 require 'json'
 require 'net/http'
 require 'uri'
-require_relative './attributes'
-require_relative './credentials'
-require_relative './errors'
+require 'lucid_intercom/attributes'
+require 'lucid_intercom/credentials'
+require 'lucid_intercom/errors'
 
 module LucidIntercom
   class SendEvent
@@ -11,13 +11,14 @@ module LucidIntercom
     # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
     # @param credentials [LucidIntercom::Credentials]
     #
-    def initialize(shop_attributes, credentials: nil)
-      @credentials = credentials || LucidIntercom.credentials
-
-      @attributes = Attributes.new(shop_attributes, {}, credentials: @credentials)
+    def initialize(shop_attributes, credentials: LucidIntercom.credentials)
+      @attributes = Attributes.new(shop_attributes, {}, credentials: credentials)
+      @credentials = credentials
     end
 
+    # @return [LucidIntercom::Attributes]
     attr_reader :attributes
+    # @return [LucidIntercom::Credentials]
     attr_reader :credentials
 
     #

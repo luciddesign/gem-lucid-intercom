@@ -1,9 +1,9 @@
 require 'json'
 require 'net/http'
 require 'uri'
-require_relative './attributes'
-require_relative './credentials'
-require_relative './errors'
+require 'lucid_intercom/attributes'
+require 'lucid_intercom/credentials'
+require 'lucid_intercom/errors'
 
 module LucidIntercom
   class UpdateUser
@@ -12,13 +12,14 @@ module LucidIntercom
     # @param app_attributes [Hash] app-specific attributes (unprefixed)
     # @param credentials [LucidIntercom::Credentials]
     #
-    def initialize(shop_attributes, app_attributes, credentials: nil)
-      @credentials = credentials || LucidIntercom.credentials
-
+    def initialize(shop_attributes, app_attributes, credentials: LucidIntercom.credentials)
       @attributes = Attributes.new(shop_attributes, app_attributes, credentials: @credentials)
+      @credentials = credentials
     end
 
+    # @return [LucidIntercom::Attributes]
     attr_reader :attributes
+    # @return [LucidIntercom::Credentials]
     attr_reader :credentials
 
     #

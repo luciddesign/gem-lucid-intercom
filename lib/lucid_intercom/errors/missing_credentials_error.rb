@@ -1,6 +1,5 @@
-require_relative './error'
+require 'lucid_intercom/errors/error'
 
 module LucidIntercom
-  class MissingCredentialsError < Error
-  end
+  MissingCredentialsError = Class.new(Error)
 end

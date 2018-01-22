@@ -1,8 +1,8 @@
 # Primarily for Bundler.
 
-require_relative './lucid_intercom/attributes'
-require_relative './lucid_intercom/credentials'
-require_relative './lucid_intercom/events'
-require_relative './lucid_intercom/render_snippet'
-require_relative './lucid_intercom/send_event'
-require_relative './lucid_intercom/update_user'
+require 'lucid_intercom/attributes'
+require 'lucid_intercom/credentials'
+require 'lucid_intercom/events'
+require 'lucid_intercom/render_snippet'
+require 'lucid_intercom/send_event'
+require 'lucid_intercom/update_user'

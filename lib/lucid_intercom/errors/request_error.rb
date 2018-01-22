@@ -1,4 +1,4 @@
-require_relative './error'
+require 'lucid_intercom/errors/error'
 
 module LucidIntercom
   class RequestError < Error
@@ -9,6 +9,7 @@ module LucidIntercom
       @status = status
     end
 
+    # @return [Integer]
     attr_reader :status
   end
 end

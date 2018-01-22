@@ -1,6 +1,6 @@
 require 'erb'
-require_relative './attributes'
-require_relative './credentials'
+require 'lucid_intercom/attributes'
+require 'lucid_intercom/credentials'
 
 module LucidIntercom
   class RenderSnippet
@@ -11,13 +11,14 @@ module LucidIntercom
     #
     # @see LucidIntercom::Attributes#initialize
     #
-    def initialize(*args, credentials: nil)
-      @credentials = credentials || LucidIntercom.credentials
-
-      @attributes = args[0].empty? ? nil : Attributes.new(*args, credentials: @credentials)
+    def initialize(*args, credentials: LucidIntercom.credentials)
+      @attributes = args[0].empty? ? nil : Attributes.new(*args, credentials: credentials)
+      @credentials = credentials
     end
 
+    # @return [LucidIntercom::Attributes]
     attr_reader :attributes
+    # @return [LucidIntercom::Credentials]
     attr_reader :credentials
 
     #

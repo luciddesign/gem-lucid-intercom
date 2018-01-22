@@ -1,6 +1,6 @@
-require_relative './attributes/user'
-require_relative './attributes/company'
-require_relative './attributes/custom'
+require 'lucid_intercom/attributes/user'
+require 'lucid_intercom/attributes/company'
+require 'lucid_intercom/attributes/custom'
 
 module LucidIntercom
   class Attributes

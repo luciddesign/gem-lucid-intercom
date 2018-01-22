@@ -1,5 +1,5 @@
-require_relative '../credentials'
-require_relative './base'
+require 'lucid_intercom/attributes/base'
+require 'lucid_intercom/credentials'
 
 module LucidIntercom
   class Attributes

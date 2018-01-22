@@ -1,3 +1,3 @@
-require_relative './events/installed'
-require_relative './events/uninstalled'
-require_relative './events/changed_plan'
+require 'lucid_intercom/events/installed'
+require 'lucid_intercom/events/uninstalled'
+require 'lucid_intercom/events/changed_plan'

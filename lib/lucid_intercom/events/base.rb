@@ -1,4 +1,4 @@
-require_relative '../credentials'
+require 'lucid_intercom/credentials'
 
 module LucidIntercom
   module Events
@@ -7,14 +7,15 @@ module LucidIntercom
       # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
       # @param credentials [LucidIntercom::Credentials]
       #
-      def initialize(shop_attributes, credentials: nil)
-        @credentials = credentials || LucidIntercom.credentials
-
+      def initialize(shop_attributes, credentials: LucidIntercom.credentials)
+        @credentials = credentials
         @shop_attributes = shop_attributes
       end
 
-      attr_reader :shop_attributes
+      # @return [LucidIntercom::Credentials]
       attr_reader :credentials
+      # @return [Hash]
+      attr_reader :shop_attributes
     end
   end
 end

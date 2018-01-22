@@ -1,4 +1,4 @@
-require_relative '../credentials'
+require 'lucid_intercom/credentials'
 
 module LucidIntercom
   class Attributes
@@ -8,15 +8,18 @@ module LucidIntercom
       # @param app_attributes [Hash] app-specific attributes (unprefixed)
       # @param credentials [LucidIntercom::Credentials]
       #
-      def initialize(shop_attributes = {}, app_attributes = {}, credentials: nil)
-        @credentials = credentials || LucidIntercom.credentials
+      def initialize(shop_attributes = {}, app_attributes = {}, credentials: LucidIntercom.credentials)
+        @credentials = credentials
         @shop_attributes = shop_attributes
         @app_attributes = app_attributes
       end
 
-      attr_reader :shop_attributes
-      attr_reader :app_attributes
+      # @return [LucidIntercom::Credentials]
       attr_reader :credentials
+      # @return [Hash]
+      attr_reader :shop_attributes
+      # @return [Hash]
+      attr_reader :app_attributes
 
       #
       # @return [Hash]

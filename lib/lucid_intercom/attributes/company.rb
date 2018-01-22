@@ -1,4 +1,4 @@
-require_relative './base'
+require 'lucid_intercom/attributes/base'
 
 module LucidIntercom
   class Attributes
