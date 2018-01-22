@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lucid-intercom (0.2.0)
+    lucid_intercom (0.3.0)
 
 GEM
   remote: https://rubygems.org/
@@ -25,7 +25,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  lucid-intercom!
+  lucid_intercom!
   rspec (~> 3.6.0)
 
 BUNDLED WITH
