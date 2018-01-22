@@ -17,10 +17,10 @@ Usage
 ### Configure the default API credentials
 
     Lucid::Intercom.credentials = Lucid::Intercom::Credentials.new(
-      access_token: '...',
-      secret: '...',
-      app_id: '...',
-      app_prefix: '...'
+      '...', # access_token
+      '...', # secret
+      '...', # app_id
+      '...'  # app_prefix
     )
 
 Here, ‘app_prefix’ is the snakecased app name, e.g. ‘smart_order_tags’
