@@ -1,22 +1,13 @@
 <script>
   window.intercomSettings = {
+    app_id: "<%= credentials.app_id %>",
     <% if attributes %>
-      <% attributes.user_browser.each do |k, v| %>
-        <%= k %>: <%= h v %>,
-      <% end %>
-
+      <% attributes.user_browser.each do |k, v| %><%= k %>: <%= h v %>,<% end %>
       company: {
-        <% attributes.company_browser.each do |k, v| %>
-          <%= k %>: <%= h v %>,
-        <% end %>
-
-        <% attributes.custom.each do |k, v| %>
-          <%= k %>: <%= h v %>,
-        <% end %>
+        <% attributes.company_browser.each do |k, v| %><%= k %>: <%= h v %>,<% end %>
+        <% attributes.custom.each do |k, v| %><%= k %>: <%= h v %>,<% end %>
       },
     <% end %>
-
-    app_id: "<%= credentials.app_id %>"
   };
 </script>
 
