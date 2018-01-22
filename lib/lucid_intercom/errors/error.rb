@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LucidIntercom
   #
   # Subclass this class for all gem exceptions, so that callers may rescue

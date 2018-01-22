@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'lucid_intercom/attributes/base'
 require 'lucid_intercom/credentials'
 

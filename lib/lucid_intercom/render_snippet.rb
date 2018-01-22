@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'erb'
 require 'lucid_intercom/attributes'
 require 'lucid_intercom/credentials'

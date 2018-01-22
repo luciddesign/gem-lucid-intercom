@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'lucid_intercom/attributes/user'
 require 'lucid_intercom/attributes/company'
 require 'lucid_intercom/attributes/custom'

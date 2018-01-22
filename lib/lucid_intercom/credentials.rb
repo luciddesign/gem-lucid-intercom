@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module LucidIntercom
   #
   # @!attribute [rw] access_token
