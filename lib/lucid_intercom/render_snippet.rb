@@ -11,11 +11,17 @@ module LucidIntercom
     #
     # Leave arguments unset for unauthenticated visitors.
     #
+    # @param credentials [LucidIntercom::Credentials]
+    #
     # @see LucidIntercom::Attributes#initialize
     #
-    def initialize(*args, credentials: LucidIntercom.credentials)
-      @attributes = args[0].empty? ? nil : Attributes.new(*args, credentials: credentials)
+    def initialize(shop_attributes = {}, app_attributes = {}, credentials = LucidIntercom.credentials)
       @credentials = credentials
+      @attributes = shop_attributes.empty? ? nil : Attributes.new(
+        shop_attributes,
+        app_attributes,
+        credentials
+      )
     end
 
     # @return [LucidIntercom::Attributes]

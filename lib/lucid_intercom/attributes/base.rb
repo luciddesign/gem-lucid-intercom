@@ -10,7 +10,7 @@ module LucidIntercom
       # @param app_attributes [Hash] app-specific attributes (unprefixed)
       # @param credentials [LucidIntercom::Credentials]
       #
-      def initialize(shop_attributes = {}, app_attributes = {}, credentials: LucidIntercom.credentials)
+      def initialize(shop_attributes = {}, app_attributes = {}, credentials = LucidIntercom.credentials)
         @credentials = credentials
         @shop_attributes = shop_attributes
         @app_attributes = app_attributes

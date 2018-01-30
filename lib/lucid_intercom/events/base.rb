@@ -9,7 +9,7 @@ module LucidIntercom
       # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
       # @param credentials [LucidIntercom::Credentials]
       #
-      def initialize(shop_attributes, credentials: LucidIntercom.credentials)
+      def initialize(shop_attributes, credentials = LucidIntercom.credentials)
         @credentials = credentials
         @shop_attributes = shop_attributes
       end
