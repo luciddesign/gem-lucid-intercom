@@ -28,7 +28,7 @@ module LucidIntercom
           merchant_domain: shop_attributes['domain'],
           merchant_myshopify_domain: shop_attributes['myshopify_domain'],
           merchant_shop_owner: shop_attributes['shop_owner'],
-          merchant_timezone: shop_attributes['timezone']
+          merchant_timezone: shop_attributes['timezone'],
         }
       end
 
@@ -45,4 +45,3 @@ module LucidIntercom
     end
   end
 end
-

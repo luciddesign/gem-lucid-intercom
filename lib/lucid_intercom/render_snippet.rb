@@ -17,11 +17,7 @@ module LucidIntercom
     #
     def initialize(shop_attributes = {}, app_attributes = {}, credentials = LucidIntercom.credentials)
       @credentials = credentials
-      @attributes = shop_attributes.empty? ? nil : Attributes.new(
-        shop_attributes,
-        app_attributes,
-        credentials
-      )
+      @attributes = Attributes.new(shop_attributes, app_attributes, credentials) if shop_attributes.empty?
     end
 
     # @return [LucidIntercom::Attributes]

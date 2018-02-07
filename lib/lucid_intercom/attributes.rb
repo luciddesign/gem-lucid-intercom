@@ -17,7 +17,7 @@ module LucidIntercom
     # @return [Hash]
     #
     def user
-      user_browser.select { |k, _| k != :user_hash }
+      user_browser.reject { |k, _| k == :user_hash }
     end
 
     #

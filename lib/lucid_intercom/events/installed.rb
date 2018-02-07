@@ -29,7 +29,7 @@ module LucidIntercom
       private def event_metadata(plan_name)
         {
           company_id: shop_attributes['myshopify_domain'],
-          new_plan: plan_name
+          new_plan: plan_name,
         }
       end
     end

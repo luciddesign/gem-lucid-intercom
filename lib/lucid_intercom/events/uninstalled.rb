@@ -25,7 +25,7 @@ module LucidIntercom
       #
       private def event_metadata
         {
-          company_id: shop_attributes['myshopify_domain']
+          company_id: shop_attributes['myshopify_domain'],
         }
       end
     end

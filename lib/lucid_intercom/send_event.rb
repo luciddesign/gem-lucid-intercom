@@ -38,7 +38,7 @@ module LucidIntercom
 
       status = res.code.to_i
 
-      if status >= 400
+      if status >= 400 # rubocop:disable Style/GuardClause
         raise LucidIntercom::RequestError.new(status), 'invalid response code %s' % status
       end
     end
