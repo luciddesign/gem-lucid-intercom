@@ -1,74 +1,44 @@
 # frozen_string_literal: true
 
-require 'json'
-require 'net/http'
-require 'uri'
-require 'lucid_intercom/attributes'
-require 'lucid_intercom/credentials'
-require 'lucid_intercom/errors'
+require 'dry-initializer'
+
+require 'lucid_intercom/post_request'
 
 module LucidIntercom
   class UpdateUser
-    #
-    # @param shop_attributes [Hash] shop attributes in format returned by the Shopify API
-    # @param app_attributes [Hash] app-specific attributes (unprefixed)
-    # @param credentials [LucidIntercom::Credentials]
-    #
-    def initialize(shop_attributes, app_attributes, credentials = LucidIntercom.credentials)
-      @attributes = Attributes.new(shop_attributes, app_attributes, credentials)
-      @credentials = credentials
-    end
+    extend Dry::Initializer
 
-    # @return [LucidIntercom::Attributes]
-    attr_reader :attributes
-    # @return [LucidIntercom::Credentials]
-    attr_reader :credentials
+    # @return [PostRequest]
+    option :post_request, default: proc { PostRequest.new }
 
     #
-    # Create or update user identified by attributes.
+    # Create or update user identified by event attributes. This is only used in
+    # the context of events.
     #
-    # @raise [LucidIntercom::RequestError] if the response status >= 400
+    # @param event [Events::Event]
     #
-    def call
-      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
-        http.request(req, data)
-      end
+    # @raise [Response::ClientError] for status 4xx
+    # @raise [Response::ServerError] for status 5xx
+    #
+    def call(event)
+      data = data(event)
 
-      status = res.code.to_i
-
-      if status >= 400 # rubocop:disable Style/GuardClause
-        raise LucidIntercom::RequestError.new(status), 'invalid response code %s' % status
-      end
+      post_request.('users', data).assert!
     end
 
     #
-    # @return [URI::HTTPS]
-    #
-    private def uri
-      URI('https://api.intercom.io/users')
-    end
-
-    #
-    # @return [Net::HTTP::Post]
-    #
-    private def req
-      req = Net::HTTP::Post.new(uri)
-      req['Authorization'] = "Bearer #{credentials.access_token}"
-      req['Accept'] = 'application/json'
-      req['Content-Type'] = 'application/json'
-
-      req
-    end
-
+    # @param event [Events::Event]
     #
     # @return [Hash]
     #
-    private def data
-      user = attributes.user
-      user[:companies] = [attributes.company]
-      user[:companies][0]['custom_attributes'] = attributes.custom
-
-      user.to_json
+    private def data(event)
+      event.user.to_h.merge(
+        companies: [
+          event.company.to_h.merge(
+            custom_attributes: event.company_custom.to_h
+          ),
+        ]
+      )
     end
   end
 end

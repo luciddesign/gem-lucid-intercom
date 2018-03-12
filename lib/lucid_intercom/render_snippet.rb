@@ -1,46 +1,50 @@
 # frozen_string_literal: true
 
 require 'erb'
-require 'lucid_intercom/attributes'
-require 'lucid_intercom/credentials'
+
+require 'lucid_intercom/config'
 
 module LucidIntercom
   class RenderSnippet
     TEMPLATE = ERB.new(File.read("#{__dir__}/snippet.html.erb")).freeze
 
     #
-    # Leave arguments unset for unauthenticated visitors.
+    # @param shopify_data [Hash] shop attributes as returned by the Shopify API
+    # @param app_data [Hash] app attributes (unprefixed)
     #
-    # @param credentials [LucidIntercom::Credentials]
+    # @example Unauthenticated visitor
+    #   render_snippet.()
     #
-    # @see LucidIntercom::Attributes#initialize
+    # @example
+    #   render_snippet.(shopify_data, app_data)
     #
-    def initialize(shop_attributes = {}, app_attributes = {}, credentials = LucidIntercom.credentials)
-      @credentials = credentials
-      @attributes = Attributes.new(shop_attributes, app_attributes, credentials) if shop_attributes.empty?
-    end
+    # @return [String]
+    #
+    def call(shopify_data = {}, app_data = {})
+      company = CompanyAttributes.new(shopify_data).to_h(browser: true)
+      company_custom = CompanyCustomAttributes.new(shopify_data, app_data).to_h
+      user = UserAttributes.new(shopify_data).to_h(browser: true)
 
-    # @return [LucidIntercom::Attributes]
-    attr_reader :attributes
-    # @return [LucidIntercom::Credentials]
-    attr_reader :credentials
-
-    #
-    # @return [String] the rendered HTML
-    #
-    def call
       TEMPLATE.result(binding)
     end
 
     #
-    # Quote and escape a value for the window.intercomSettings object.
+    # Quote and escape a value for JavaScript.
     #
-    private def h(v)
-      v.is_a?(String) ? ?" + v.gsub(/./) { |c| escape_char(c) } + ?" : v
-    end
+    # @param obj [Object]
+    #
+    # @return [Object]
+    #
+    def escape(obj)
+      return obj unless obj.is_a?(String)
 
-    private def escape_char(c)
-      %w(" ' / < > \\).include?(c) ? '\%s' % c : c
+      s = obj.gsub(/./) do |c|
+        return c unless %w(" ' / < > \\).include?(c)
+
+        "\\#{c}"
+      end
+
+      "\"#{s}\""
     end
   end
 end
