@@ -7,7 +7,7 @@ module LucidIntercom
     #
     # @return [Hash]
     #
-    private def call(attributes)
+    def call(attributes)
       attributes.each_with_object({}) do |(k, obj), h|
         h[k] = convert(obj)
       end
