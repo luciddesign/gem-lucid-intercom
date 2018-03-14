@@ -2,6 +2,8 @@
 
 $LOAD_PATH << __dir__ + '/../lib'
 
+require_relative 'support/fixture_helpers'
+
 require 'lucid_intercom/config'
 
 LucidIntercom.config = LucidIntercom::Config.new(
