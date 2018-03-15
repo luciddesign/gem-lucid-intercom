@@ -1,2 +1,8 @@
 ---
-# TODO
+domain: lucid.nz
+email team@lucid.nz
+myshopify_domain: lucid.myshopify.com
+name: Lucid
+plan_name: basic
+shop_owner: Galen King
+timezone: (GMT+12:00) New Zealand Standard Time
