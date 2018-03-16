@@ -15,11 +15,13 @@ RSpec.describe LucidIntercom::Convert do
       unset: nil
     )
 
-    expect(attributes[:float]).to be(1.0)
-    expect(attributes[:integer]).to be(1)
-    expect(attributes[:string]).to eq('example')
-    expect(attributes[:symbol]).to eq('example')
-    expect(attributes[:time]).to be(0)
-    expect(attributes[:unset]).to be_nil
+    expect(attributes).to eq(
+      float: 1.0,
+      integer: 1,
+      string: 'example',
+      symbol: 'example',
+      time: 0,
+      unset: nil
+    )
   end
 end
