@@ -5,9 +5,10 @@ require 'lucid_intercom/changed_plan_event'
 require_relative 'event_shared_examples'
 
 RSpec.describe LucidIntercom::ChangedPlanEvent do
-  let(:event) { LucidIntercom::ChangedPlanEvent.new(fixture('shopify_data.yml'), 'plus') }
+  let(:event) { LucidIntercom::ChangedPlanEvent.new(shopify_data, 'plus') }
 
   include_examples 'event'
+  include_fixtures 'shopify_data.yml'
 
   it 'has the correct name' do
     expect(event.event_name).to end_with('_changed_plan')

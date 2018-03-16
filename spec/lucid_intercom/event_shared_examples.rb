@@ -10,7 +10,9 @@ RSpec.shared_examples 'event' do
   end
 
   it 'has an event_name prefixed with the app name' do
-    expect(event.event_name).to start_with(LucidIntercom.app_prefix + '_')
+    prefix = LucidIntercom.config.app_prefix
+
+    expect(event.event_name).to start_with("#{prefix}_")
   end
 
   it 'has event_metadata identified with the myshopify_domain' do

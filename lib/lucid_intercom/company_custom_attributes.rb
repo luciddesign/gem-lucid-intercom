@@ -14,7 +14,7 @@ module LucidIntercom
     # @return [Hash]
     #
     def to_h(convert: Convert.new)
-      convert.(**shopify, **app)
+      convert.(shopify.merge(app))
     end
 
     #

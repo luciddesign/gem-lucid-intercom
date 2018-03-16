@@ -3,7 +3,7 @@
 require 'lucid_intercom/response'
 
 class PostRequestDouble
-  def call(path, data, status_code: 200)
+  def call(_path, _data, status_code: 200)
     Response.new(status_code)
   end
 end

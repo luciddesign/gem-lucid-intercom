@@ -5,9 +5,10 @@ require 'lucid_intercom/installed_event'
 require_relative 'event_shared_examples'
 
 RSpec.describe LucidIntercom::InstalledEvent do
-  let(:event) { LucidIntercom::InstalledEvent.new(fixture('shopify_data.yml'), 'free') }
+  let(:event) { LucidIntercom::InstalledEvent.new(shopify_data, 'free') }
 
   include_examples 'event'
+  include_fixtures 'shopify_data.yml'
 
   it 'has the correct name' do
     expect(event.event_name).to end_with('_installed')
