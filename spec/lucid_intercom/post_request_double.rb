@@ -4,6 +4,6 @@ require 'lucid_intercom/response'
 
 class PostRequestDouble
   def call(_path, _data, status_code: 200)
-    Response.new(status_code)
+    LucidIntercom::Response.new(status_code)
   end
 end
