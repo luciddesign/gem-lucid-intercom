@@ -23,7 +23,7 @@ RSpec.describe LucidIntercom::UpdateUser do
           custom_attributes: hash_including(
             'fake_plan' => 'free'
           )
-        )
+        ),
       ]
     )
 
