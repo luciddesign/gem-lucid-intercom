@@ -23,7 +23,7 @@ module LucidIntercom
     # @raise [NotConfiguredError] if config is unset
     #
     def config
-      raise LucidIntercom::NotConfiguredError unless @config
+      raise NotConfiguredError unless @config
 
       @config
     end
