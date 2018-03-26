@@ -3,7 +3,7 @@
 require 'lucid_intercom/post_request'
 
 RSpec.describe LucidIntercom::PostRequest do
-  let(:post_request) { LucidIntercom::PostRequest.new }
+  subject(:post_request) { LucidIntercom::PostRequest.new }
 
   it 'returns a response' do
     http = double

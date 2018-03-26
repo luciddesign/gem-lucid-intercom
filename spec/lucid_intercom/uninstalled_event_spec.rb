@@ -5,7 +5,7 @@ require 'lucid_intercom/uninstalled_event'
 require_relative 'event_shared_examples'
 
 RSpec.describe LucidIntercom::UninstalledEvent do
-  let(:event) { LucidIntercom::UninstalledEvent.new(shopify_data) }
+  subject(:event) { LucidIntercom::UninstalledEvent.new(shopify_data) }
 
   include_examples 'event'
   include_fixtures 'shopify_data.yml'

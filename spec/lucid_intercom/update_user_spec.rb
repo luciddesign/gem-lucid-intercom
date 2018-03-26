@@ -8,7 +8,8 @@ require_relative 'post_request_double'
 RSpec.describe LucidIntercom::UpdateUser do
   let(:event) { LucidIntercom::InstalledEvent.new(shopify_data, 'free') }
   let(:post_request) { PostRequestDouble.new }
-  let(:update_user) do
+
+  subject(:update_user) do
     LucidIntercom::UpdateUser.new(
       post_request: post_request
     )

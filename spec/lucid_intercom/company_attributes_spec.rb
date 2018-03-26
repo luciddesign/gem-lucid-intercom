@@ -5,7 +5,7 @@ require 'lucid_intercom/company_attributes'
 require_relative 'attributes_shared_examples'
 
 RSpec.describe LucidIntercom::CompanyAttributes do
-  let(:attributes) { LucidIntercom::CompanyAttributes.new(shopify_data) }
+  subject(:attributes) { LucidIntercom::CompanyAttributes.new(shopify_data) }
 
   include_examples 'attributes'
   include_fixtures 'shopify_data.yml'

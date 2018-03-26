@@ -3,7 +3,7 @@
 require 'lucid_intercom/convert'
 
 RSpec.describe LucidIntercom::Convert do
-  let(:convert) { LucidIntercom::Convert.new }
+  subject(:convert) { LucidIntercom::Convert.new }
 
   it 'converts attributes to valid intercom types' do
     attributes = convert.(
