@@ -10,16 +10,6 @@ RSpec.describe LucidIntercom::UninstalledEvent do
   include_examples 'event'
   include_fixtures 'shopify_data.yml'
 
-  it 'has the correct name' do
-    expect(event.event_name).to end_with('_uninstalled')
-  end
-
-  it 'has the correct metadata' do
-    expect(event.event_metadata.length).to be(1)
-  end
-
-  it 'has the correct app_data' do
-    expect(event.app_data.length).to be(1)
-    expect(event.app_data).to include(plan: nil)
-  end
+  it { is_expected.to have_attributes(event_name: a_string_ending_with('_uninstalled')) }
+  it { is_expected.to have_attributes(app_data: {plan: nil}) }
 end

@@ -11,13 +11,13 @@ RSpec.shared_examples 'event' do
   it { is_expected.to have_attributes(event_metadata: instance_of(Hash)) }
   it { is_expected.to have_attributes(app_data: instance_of(Hash)) }
 
-  it 'has an event_name prefixed with the app name' do
+  it '#event_name is prefixed with the app name' do
     prefix = LucidIntercom.config.app_prefix
 
     expect(event.event_name).to start_with("#{prefix}_")
   end
 
-  it 'has event_metadata identified with the myshopify_domain' do
-    expect(event.event_metadata).to include(company_id: event.shopify_data['myshopify_domain'])
+  it '#event_metadata is identified by the myshopify_domain' do
+    expect(event.event_metadata).to include(company_id: shopify_data['myshopify_domain'])
   end
 end

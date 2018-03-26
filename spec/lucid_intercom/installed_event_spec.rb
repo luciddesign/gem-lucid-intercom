@@ -10,17 +10,7 @@ RSpec.describe LucidIntercom::InstalledEvent do
   include_examples 'event'
   include_fixtures 'shopify_data.yml'
 
-  it 'has the correct name' do
-    expect(event.event_name).to end_with('_installed')
-  end
-
-  it 'has the correct metadata' do
-    expect(event.event_metadata.length).to be(2)
-    expect(event.event_metadata).to include(new_plan: 'free')
-  end
-
-  it 'has the correct app_data' do
-    expect(event.app_data.length).to be(1)
-    expect(event.app_data).to include(plan: 'free')
-  end
+  it { is_expected.to have_attributes(event_name: a_string_ending_with('_installed')) }
+  it { is_expected.to have_attributes(event_metadata: a_hash_including(new_plan: 'free')) }
+  it { is_expected.to have_attributes(app_data: {plan: 'free'}) }
 end

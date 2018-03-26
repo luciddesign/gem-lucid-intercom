@@ -8,7 +8,7 @@ require_relative 'post_request_double'
 RSpec.describe LucidIntercom::SendEvent do
   let(:event) { LucidIntercom::InstalledEvent.new(shopify_data, 'free') }
   let(:post_request) { PostRequestDouble.new }
-  let(:update_user) { double.as_null_object }
+  let(:update_user) { double('update_user').as_null_object }
 
   subject(:send_event) do
     LucidIntercom::SendEvent.new(
@@ -19,7 +19,7 @@ RSpec.describe LucidIntercom::SendEvent do
 
   include_fixtures 'shopify_data.yml'
 
-  it 'posts the event' do
+  it 'posts the event data' do
     data = hash_including(
       event.user.id_key,
       created_at: within(1).of(Time.now.utc.to_i),

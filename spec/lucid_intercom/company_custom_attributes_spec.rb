@@ -10,18 +10,13 @@ RSpec.describe LucidIntercom::CompanyCustomAttributes do
   include_examples 'attributes'
   include_fixtures 'shopify_data.yml'
 
-  it 'has custom merchant attributes' do
-    expect(attributes.to_h).to include(
-      :merchant_domain,
-      :merchant_myshopify_domain,
-      :merchant_shop_owner,
-      :merchant_timezone
-    )
-  end
+  describe '#to_h' do
+    subject { attributes.to_h }
 
-  it 'has custom app attributes' do
-    prefix = LucidIntercom.config.app_prefix
-
-    expect(attributes.to_h).to include("#{prefix}_plan" => 'free')
+    it { is_expected.to include(:merchant_domain) }
+    it { is_expected.to include(:merchant_myshopify_domain) }
+    it { is_expected.to include(:merchant_shop_owner) }
+    it { is_expected.to include(:merchant_timezone) }
+    it { is_expected.to include("#{LucidIntercom.config.app_prefix}_plan" => 'free') }
   end
 end

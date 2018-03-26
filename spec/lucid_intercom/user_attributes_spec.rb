@@ -10,27 +10,27 @@ RSpec.describe LucidIntercom::UserAttributes do
   include_examples 'attributes'
   include_fixtures 'shopify_data.yml'
 
-  it 'has user attributes' do
-    expect(attributes.to_h).to include(:email, :name)
-  end
-
-  context 'for event' do
+  context 'for event, #to_h' do
     subject { attributes.to_h }
 
+    it { is_expected.to include(:email) }
+    it { is_expected.to include(:name) }
     it { is_expected.to not_include(:user_hash) }
   end
 
-  context 'for browser' do
+  context 'for browser, #to_h' do
     subject { attributes.to_h(browser: true) }
 
+    it { is_expected.to include(:email) }
+    it { is_expected.to include(:name) }
     it { is_expected.to include(:user_hash) }
   end
 
-  it 'has id_key' do
+  it 'has #id_key' do
     expect(attributes.id_key).to be(:email)
   end
 
-  it 'has id' do
+  it 'has #id' do
     expect(attributes.id).to eq(shopify_data['email'])
   end
 end
