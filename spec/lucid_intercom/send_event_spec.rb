@@ -9,13 +9,17 @@ module LucidIntercom
   RSpec.describe SendEvent do
     let(:event) { InstalledEvent.new(shopify_data, 'free') }
     let(:post_request) { PostRequestDouble.new }
-    let(:update_user) { double('update_user').as_null_object }
+    let(:update_user) { instance_double('UpdateUser') }
 
     subject(:send_event) do
       SendEvent.new(
         post_request: post_request,
         update_user: update_user
       )
+    end
+
+    before do
+      allow(update_user).to receive(:call)
     end
 
     include_fixtures 'shopify_data.yml'
