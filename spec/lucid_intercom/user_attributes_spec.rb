@@ -7,8 +7,9 @@ require_relative 'attributes_shared_examples'
 RSpec.describe LucidIntercom::UserAttributes do
   subject(:attributes) { LucidIntercom::UserAttributes.new(shopify_data) }
 
-  include_examples 'attributes'
   include_fixtures 'shopify_data.yml'
+
+  it_behaves_like 'attributes'
 
   context 'for event, #to_h' do
     subject { attributes.to_h }

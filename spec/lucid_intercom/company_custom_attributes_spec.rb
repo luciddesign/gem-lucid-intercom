@@ -7,8 +7,9 @@ require_relative 'attributes_shared_examples'
 RSpec.describe LucidIntercom::CompanyCustomAttributes do
   subject(:attributes) { LucidIntercom::CompanyCustomAttributes.new(shopify_data, plan: 'free') }
 
-  include_examples 'attributes'
   include_fixtures 'shopify_data.yml'
+
+  it_behaves_like 'attributes'
 
   describe '#to_h' do
     subject { attributes.to_h }
