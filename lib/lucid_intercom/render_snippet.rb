@@ -1,12 +1,10 @@
 # frozen_string_literal: true
 
-require 'erb'
-
 require 'lucid_intercom/config'
 
 module LucidIntercom
   class RenderSnippet
-    TEMPLATE = ERB.new(File.read("#{__dir__}/snippet.html.erb")).freeze
+    TEMPLATE = File.read("#{__dir__}/snippet.html").freeze
 
     #
     # @param shopify_data [Hash] shop attributes as returned by the Shopify API
@@ -21,30 +19,14 @@ module LucidIntercom
     # @return [String]
     #
     def call(shopify_data = {}, app_data = {})
-      company = CompanyAttributes.new(shopify_data).to_h(browser: true)
-      company_custom = CompanyCustomAttributes.new(shopify_data, app_data).to_h
-      user = UserAttributes.new(shopify_data).to_h(browser: true)
+      settings = UserAttributes.new(shopify_data).to_h(browser: true)
+      settings[:app_id] = LucidIntercom.app_id
+      settings[:company] = CompanyAttributes.new(shopify_data).to_h(browser: true).merge(CompanyCustomAttributes.new(shopify_data, app_data).to_h)
 
-      TEMPLATE.result(binding)
-    end
-
-    #
-    # Quote and escape a value for JavaScript.
-    #
-    # @param obj [Object]
-    #
-    # @return [Object]
-    #
-    def escape(obj)
-      return obj unless obj.is_a?(String)
-
-      s = obj.gsub(/./) do |c|
-        return c unless %w(" ' / < > \\).include?(c)
-
-        "\\#{c}"
-      end
-
-      "\"#{s}\""
+      TEMPLATE % {
+        settings: settings.to_json,
+        app_id: settings[:app_id],
+      }
     end
   end
 end
