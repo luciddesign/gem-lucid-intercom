@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry-initializer'
-
-require 'lucid_intercom/error'
+require 'lucid_intercom'
 
 module LucidIntercom
   class Response

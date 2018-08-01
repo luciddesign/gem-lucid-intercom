@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/company_attributes'
-require 'lucid_intercom/company_custom_attributes'
-require 'lucid_intercom/config'
-require 'lucid_intercom/user_attributes'
+require 'lucid_intercom'
 
 module LucidIntercom
   class Event

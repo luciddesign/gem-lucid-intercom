@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/config'
+require 'lucid_intercom'
 
 module LucidIntercom
   class RenderSnippet

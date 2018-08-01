@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/attributes'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class CompanyAttributes < Attributes
@@ -10,7 +10,7 @@ module LucidIntercom
     #
     # @return [Hash]
     #
-    def to_h(browser: false, convert: Convert.new)
+    def to_h(browser: false, convert: Container[:convert])
       convert.({}.tap do |h|
         h[browser ? :id : :company_id] = shopify_data['myshopify_domain']
         h[:name] = shopify_data['name']

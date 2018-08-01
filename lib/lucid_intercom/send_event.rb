@@ -1,17 +1,15 @@
 # frozen_string_literal: true
 
-require 'dry-initializer'
-
-require 'lucid_intercom/post_request'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class SendEvent
     extend Dry::Initializer
 
     # @return [PostRequest]
-    option :post_request, default: proc { PostRequest.new }
+    option :post_request, default: proc { Container[:post_request] }
     # @return [UpdateUser]
-    option :update_user, default: proc { UpdateUser.new }
+    option :update_user, default: proc { Container[:update_user] }
 
     #
     # @param event [Events::Event]

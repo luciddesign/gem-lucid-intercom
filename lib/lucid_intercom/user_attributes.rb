@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/attributes'
-require 'lucid_intercom/config'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class UserAttributes < Attributes
@@ -11,7 +10,7 @@ module LucidIntercom
     #
     # @return [Hash]
     #
-    def to_h(browser: false, convert: Convert.new)
+    def to_h(browser: false, convert: Container[:convert])
       convert.({}.tap do |h|
         h[:user_hash] = user_hash(id) if browser # or myshopify_domain
         h[:email] = shopify_data['email']

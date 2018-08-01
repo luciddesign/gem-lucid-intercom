@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-require 'dry-initializer'
-
-require 'lucid_intercom/post_request'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class UpdateUser
     extend Dry::Initializer
 
     # @return [PostRequest]
-    option :post_request, default: proc { PostRequest.new }
+    option :post_request, default: proc { Container[:post_request] }
 
     #
     # Create or update user identified by event attributes. This is only used in

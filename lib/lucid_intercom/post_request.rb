@@ -2,8 +2,7 @@
 
 require 'http'
 
-require 'lucid_intercom/config'
-require 'lucid_intercom/response'
+require 'lucid_intercom'
 
 module LucidIntercom
   class PostRequest

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/event'
+require 'lucid_intercom'
 
 module LucidIntercom
   class InstalledEvent < Event

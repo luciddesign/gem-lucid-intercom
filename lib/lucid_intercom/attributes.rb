@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'dry-initializer'
-
-require 'lucid_intercom/convert'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class Attributes
@@ -18,7 +16,7 @@ module LucidIntercom
     #
     # @return [Hash]
     #
-    def to_h(convert: Convert.new)
+    def to_h(convert: Container[:convert])
       convert.({})
     end
   end

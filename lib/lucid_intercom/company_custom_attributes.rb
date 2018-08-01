@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/attributes'
-require 'lucid_intercom/config'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class CompanyCustomAttributes < Attributes
@@ -13,7 +12,7 @@ module LucidIntercom
     #
     # @return [Hash]
     #
-    def to_h(convert: Convert.new)
+    def to_h(convert: Container[:convert])
       convert.(shopify.merge(app))
     end
 
