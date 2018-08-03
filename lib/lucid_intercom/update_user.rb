@@ -4,10 +4,12 @@ require 'lucid_intercom/container'
 
 module LucidIntercom
   class UpdateUser
-    extend Dry::Initializer
-
-    # @return [PostRequest]
-    option :post_request, default: proc { Container[:post_request] }
+    #
+    # @param post_request [#call]
+    #
+    def initialize(post_request: Container[:post_request])
+      @post_request = post_request
+    end
 
     #
     # Create or update user identified by event attributes. This is only used in
@@ -19,9 +21,7 @@ module LucidIntercom
     # @raise [Response::ServerError] for status 5xx
     #
     def call(event)
-      data = data(event)
-
-      post_request.('users', data).assert!
+      @post_request.('users', data(event)).assert!
     end
 
     #

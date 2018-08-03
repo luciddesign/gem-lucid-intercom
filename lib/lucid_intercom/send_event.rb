@@ -4,12 +4,15 @@ require 'lucid_intercom/container'
 
 module LucidIntercom
   class SendEvent
-    extend Dry::Initializer
-
-    # @return [PostRequest]
-    option :post_request, default: proc { Container[:post_request] }
-    # @return [UpdateUser]
-    option :update_user, default: proc { Container[:update_user] }
+    #
+    # @param post_request [#call]
+    # @param send_event [#call]
+    #
+    def initialize(post_request: Container[:post_request],
+                   update_user: Container[:update_user])
+      @post_request = post_request
+      @update_user = update_user
+    end
 
     #
     # @param event [Events::Event]
@@ -18,9 +21,9 @@ module LucidIntercom
     # @raise [Response::ServerError] for status 5xx
     #
     def call(event)
-      post_request.('events', data(event)).assert!
+      @post_request.('events', data(event)).assert!
 
-      update_user.(event)
+      @update_user.(event)
     end
 
     #
