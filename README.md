@@ -37,11 +37,17 @@ See the source code for documentation of arguments.
 
 When a user installs/uninstalls the app, or changes their plan:
 
-    event = LucidIntercom::InstalledEvent.new(shopify_data, new_plan)
-    event = LucidIntercom::UninstalledEvent.new(shopify_data)
-    event = LucidIntercom::ChangedPlanEvent.new(shopify_data, new_plan)
+    notify = LucidIntercom::NotifyInstalled.new
 
-    LucidIntercom::SendEvent.new.(event)
+    notify.(shopify_data, new_plan)
+
+    notify = LucidIntercom::NotifyUninstalled.new
+
+    notify.(shopify_data)
+
+    notify = LucidIntercom::NotifyChangedPlan.new
+
+    notify.(shopify_data, new_plan)
 
 Note that the `shopify_data` hash for uninstalled events cannot be
 read from the API (as the access token is invalid at this stage).
@@ -63,4 +69,8 @@ For partner-friendly app installs, use ‘partner’.
 ### Custom events
 
 To define a custom event, subclass `LucidIntercom::Event`. See the
-source code for documentation.
+source code for documentation, and existing subclasses:
+
+* `LucidIntercom::NotifyChangedPlan`
+* `LucidIntercom::NotifyInstalled`
+* `LucidIntercom::NotifyUninstalled`
