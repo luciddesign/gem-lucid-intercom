@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/company_custom_attributes'
-
 require_relative 'attributes_shared_examples'
 
 module LucidIntercom

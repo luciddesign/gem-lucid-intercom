@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/installed_event'
-require 'lucid_intercom/update_user'
-
-require_relative 'post_request_double'
-
 module LucidIntercom
   RSpec.describe UpdateUser do
-    let(:event) { InstalledEvent.new(shopify_data, 'free') }
-    let(:post_request) { PostRequestDouble.new }
+    let(:post_request) { instance_double('PostRequest') }
+    let(:user) { UserAttributes.new(shopify_data, {plan: 'free'}) }
 
     subject(:update_user) do
       UpdateUser.new(
@@ -19,19 +14,22 @@ module LucidIntercom
     include_fixtures 'shopify_data.yml'
 
     it 'posts the updated user data' do
-      data = hash_including(
-        companies: [
-          hash_including(
-            custom_attributes: hash_including(
-              'fake_plan' => 'free'
-            )
-          ),
-        ]
-      )
+      expect(post_request).to receive(:call) do |path, data|
+        expect(path).to eq('users')
+        expect(data).to include(
+          companies: [
+            hash_including(
+              custom_attributes: hash_including(
+                'fake_plan' => 'free'
+              )
+            ),
+          ]
+        )
 
-      expect(post_request).to receive(:call).with('users', data).and_call_original
+        Response.new(200) # for #assert!
+      end
 
-      update_user.(event)
+      update_user.(user)
     end
   end
 end

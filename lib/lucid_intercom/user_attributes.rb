@@ -4,6 +4,9 @@ require 'lucid_intercom/container'
 
 module LucidIntercom
   class UserAttributes < Attributes
+    # @return [CompanyAttributes]
+    param :company, default: -> { CompanyAttributes.new(shopify_data, app_data) }
+
     #
     # @param browser [Boolean] format for browser snippet
     # @param convert [#call]

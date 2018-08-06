@@ -9,8 +9,10 @@ module LucidIntercom
 
   # Services only (dependencies); no value objects, entities.
   Container.register(:convert) { Convert.new }
+  Container.register(:notify_changed_plan) { NotifyChangedPlan.new }
+  Container.register(:notify_installed) { NotifyInstalled.new }
+  Container.register(:notify_uninstalled) { NotifyUninstalled.new }
   Container.register(:post_request) { PostRequest.new }
   Container.register(:render_snippet) { RenderSnippet.new }
-  Container.register(:send_event) { SendEvent.new }
   Container.register(:update_user) { UpdateUser.new }
 end

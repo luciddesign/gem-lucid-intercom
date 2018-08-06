@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/convert'
-
 module LucidIntercom
   RSpec.describe Convert do
     subject(:convert) { Convert.new }

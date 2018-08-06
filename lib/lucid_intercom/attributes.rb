@@ -8,6 +8,8 @@ module LucidIntercom
 
     # @return [Hash] shop attributes as returned by the Shopify API
     param :shopify_data, reader: :private
+    # @return [Hash] app attributes (unprefixed)
+    param :app_data, reader: :private, default: -> { {} }
 
     #
     # @abstract

@@ -4,9 +4,6 @@ require 'lucid_intercom/container'
 
 module LucidIntercom
   class CompanyCustomAttributes < Attributes
-    # @return [Hash] app attributes (unprefixed)
-    param :app_data, reader: :private
-
     #
     # @param convert [#call]
     #

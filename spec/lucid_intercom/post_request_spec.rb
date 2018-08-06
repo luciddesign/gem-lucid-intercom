@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/post_request'
-
 module LucidIntercom
   RSpec.describe PostRequest do
     subject(:post_request) { PostRequest.new }

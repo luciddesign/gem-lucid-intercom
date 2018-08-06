@@ -1,32 +1,72 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom'
+require 'lucid_intercom/container'
 
 module LucidIntercom
   class Event
-    extend Dry::Initializer
+    #
+    # @param post_request [#call]
+    # @param update_user [#call]
+    #
+    def initialize(post_request: Container[:post_request],
+                   update_user: Container[:update_user])
+      @post_request = post_request
+      @update_user = update_user
+    end
 
-    # @return [Hash] shop attributes as returned by the Shopify API
-    param :shopify_data
-    # @return [CompanyAttributes]
-    option :company, default: proc { CompanyAttributes.new(shopify_data) }
-    # @return [CompanyCustomAttributes]
-    option :company_custom, default: proc { CompanyCustomAttributes.new(shopify_data, app_data) }
-    # @return [UserAttributes]
-    option :user, default: proc { UserAttributes.new(shopify_data) }
+    #
+    # @param shopify_data_or_user [Hash, UserAttributes] shop attributes as returned by the Shopify API
+    # @param *args [Array<Object>]
+    #
+    def notify(shopify_data_or_user, *args)
+      user = shopify_data_or_user
+      user = UserAttributes.new(user, app_data(*args)) if user.is_a?(Hash)
+
+      @post_request.('events', data(user, *args)).assert!
+
+      @update_user.(user)
+    end
+
+    alias_method :call, :notify
+
+    #
+    # @param user [UserAttributes]
+    # @param *args [Array<Object>]
+    #
+    # @return [Hash]
+    #
+    private def data(user, *args)
+      {
+        **data_user_id(user),
+        event_name: name,
+        created_at: Time.now.utc.to_i,
+        metadata: metadata(user, *args),
+      }
+    end
+
+    #
+    # @param user [UserAttributes]
+    #
+    # @return [Hash]
+    #
+    private def data_user_id(user)
+      {
+        user.id_key => user.id,
+      }
+    end
 
     #
     # Set the event name for the subclass.
     #
-    # @param event_name [String, #to_s]
+    # @param name [String, #to_s]
     #
     # @example
     #   event :changed_plan
     #
-    def self.event(event_name)
-      define_method(:event_name) do
-        "#{LucidIntercom.app_prefix}_#{event_name}"
-      end
+    def self.event(name)
+      define_method(:name) { "#{LucidIntercom.app_prefix}_#{name}" }
+
+      private :name
     end
 
     #
@@ -34,16 +74,19 @@ module LucidIntercom
     #
     # @return [String]
     #
-    def event_name
+    private def name
       raise NotImplementedError
     end
 
     #
     # @abstract
     #
+    # @param user [UserAttributes]
+    # @param *args [Array<Object>]
+    #
     # @return [Hash]
     #
-    def event_metadata
+    private def metadata(user, *args)
       raise NotImplementedError
     end
 
@@ -58,17 +101,8 @@ module LucidIntercom
     #
     # @return [Hash]
     #
-    def app_data
+    private def app_data(*)
       {}
-    end
-
-    #
-    # @return [Hash]
-    #
-    def user_id
-      {
-        user.id_key => user.id,
-      }
     end
   end
 end

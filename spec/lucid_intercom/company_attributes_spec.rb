@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/company_attributes'
-
 require_relative 'attributes_shared_examples'
 
 module LucidIntercom
@@ -26,6 +24,10 @@ module LucidIntercom
       it { is_expected.to include(:name) }
       it { is_expected.to include(:plan) }
       it { is_expected.to include(:id).and not_include(:company_id) }
+    end
+
+    it 'has #custom' do
+      expect(attributes.custom).to be_a(CompanyCustomAttributes)
     end
   end
 end

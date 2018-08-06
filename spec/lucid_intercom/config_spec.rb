@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/config'
-
 RSpec.describe LucidIntercom.config do
   it { is_expected.to have_attributes(access_token: 'fake') }
   it { is_expected.to have_attributes(secret: 'fake') }
@@ -11,8 +9,7 @@ RSpec.describe LucidIntercom.config do
   it 'raises an error when unset' do
     LucidIntercom.config = nil
 
-    expect { LucidIntercom.config.api_key }.to raise_error(LucidIntercom::NotConfiguredError
-)
+    expect { LucidIntercom.config.api_key }.to raise_error(LucidIntercom::NotConfiguredError)
 
     LucidIntercom.config = subject
   end

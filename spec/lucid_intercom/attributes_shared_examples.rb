@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/attributes'
-
 module LucidIntercom
   RSpec.shared_examples 'attributes' do
     it 'has attributes' do

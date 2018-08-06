@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/response'
-
 module LucidIntercom
   RSpec.describe Response do
     let(:status_code) { 200 }

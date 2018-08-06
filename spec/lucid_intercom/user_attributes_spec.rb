@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'lucid_intercom/user_attributes'
-
 require_relative 'attributes_shared_examples'
 
 module LucidIntercom
@@ -26,6 +24,10 @@ module LucidIntercom
       it { is_expected.to include(:email) }
       it { is_expected.to include(:name) }
       it { is_expected.to include(:user_hash) }
+    end
+
+    it 'has #company' do
+      expect(attributes.company).to be_a(CompanyAttributes)
     end
 
     it 'has #id_key' do

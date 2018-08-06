@@ -12,28 +12,27 @@ module LucidIntercom
     end
 
     #
-    # Create or update user identified by event attributes. This is only used in
-    # the context of events.
+    # Create or update user.
     #
-    # @param event [Events::Event]
+    # @param user [UserAttributes]
     #
     # @raise [Response::ClientError] for status 4xx
     # @raise [Response::ServerError] for status 5xx
     #
-    def call(event)
-      @post_request.('users', data(event)).assert!
+    def call(user)
+      @post_request.('users', data(user)).assert!
     end
 
     #
-    # @param event [Events::Event]
+    # @param user [UserAttributes]
     #
     # @return [Hash]
     #
-    private def data(event)
-      event.user.to_h.merge(
+    private def data(user)
+      user.to_h.merge(
         companies: [
-          event.company.to_h.merge(
-            custom_attributes: event.company_custom.to_h
+          user.company.to_h.merge(
+            custom_attributes: user.company.custom.to_h
           ),
         ]
       )
