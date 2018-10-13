@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'dry/container'
+require 'http'
 
 require 'lucid_intercom'
 
@@ -9,6 +10,7 @@ module LucidIntercom
 
   # Services only (dependencies); no value objects, entities.
   Container.register(:convert) { Convert.new }
+  Container.register(:http) { HTTP::Client.new }
   Container.register(:notify_changed_plan) { NotifyChangedPlan.new }
   Container.register(:notify_installed) { NotifyInstalled.new }
   Container.register(:notify_uninstalled) { NotifyUninstalled.new }
