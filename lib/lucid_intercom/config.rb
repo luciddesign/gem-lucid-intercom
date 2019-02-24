@@ -10,8 +10,13 @@ module LucidIntercom
   class << self
     extend Forwardable
 
-    # TODO: *Config.dry_initializer.attributes (version 2.0.0+)
-    def_delegators :config, :access_token, :secret, :app_id, :app_prefix
+    def_delegators(
+      :config,
+      :access_token,
+      :secret,
+      :app_id,
+      :app_prefix
+    )
 
     # @param config [Config]
     attr_writer :config
