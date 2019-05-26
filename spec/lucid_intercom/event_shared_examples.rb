@@ -4,7 +4,7 @@ module LucidIntercom
   RSpec.shared_examples 'event' do |name, *args, **metadata|
     describe '#notify' do
       before do
-        allow(post_request).to receive(:call) { Response.new(200) } # for #assert!
+        allow(post_request).to receive(:call) { Response.new(200, {}, '{}') } # for #assert!
         allow(update_user).to receive(:call)
       end
 
@@ -21,7 +21,7 @@ module LucidIntercom
             )
           )
 
-          Response.new(200) # for #assert!
+          Response.new(200, {}, '{}') # for #assert!
         end
 
         event.notify(shopify_data, *args)

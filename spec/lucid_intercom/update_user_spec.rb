@@ -26,7 +26,7 @@ module LucidIntercom
           ]
         )
 
-        Response.new(200) # for #assert!
+        Response.new(200, {}, '{}') # for #assert!
       end
 
       update_user.(user)

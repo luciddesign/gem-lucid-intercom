@@ -24,7 +24,7 @@ module LucidIntercom
         'Content-Type' => 'application/json'
       ).post("https://api.intercom.io/#{path}", json: data)
 
-      Response.new(res.code)
+      Response.new(res.code, res.headers.to_h, res.to_s)
     end
   end
 end
