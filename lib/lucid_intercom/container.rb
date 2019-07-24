@@ -17,5 +17,6 @@ module LucidIntercom
   Container.register(:post_request) { PostRequest.new }
   Container.register(:render_snippet) { RenderSnippet.new }
   Container.register(:send_email) { SendEmail.new }
+  Container.register(:send_message) { SendMessage.new }
   Container.register(:update_user) { UpdateUser.new }
 end

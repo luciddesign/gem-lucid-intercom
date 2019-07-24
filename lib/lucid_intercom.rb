@@ -18,6 +18,7 @@ module LucidIntercom
   autoload :RenderSnippet, 'lucid_intercom/render_snippet.rb'
   autoload :Response, 'lucid_intercom/response.rb'
   autoload :SendEmail, 'lucid_intercom/send_email.rb'
+  autoload :SendMessage, 'lucid_intercom/send_message.rb'
   autoload :UpdateUser, 'lucid_intercom/update_user.rb'
   autoload :UserAttributes, 'lucid_intercom/user_attributes.rb'
   autoload :VERSION, 'lucid_intercom/version.rb'
