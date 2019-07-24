@@ -18,7 +18,8 @@ Usage
       '...', # access_token
       '...', # secret
       '...', # app_id
-      '...'  # app_prefix
+      '...', # app_prefix
+      123456 # admin_id
     )
 
 Here, ‘app_prefix’ is the snakecased app name, e.g. ‘smart_order_tags’

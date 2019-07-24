@@ -15,7 +15,8 @@ module LucidIntercom
       :access_token,
       :secret,
       :app_id,
-      :app_prefix
+      :app_prefix,
+      :admin_id # for messages/emails
     )
 
     # @param config [Config]
@@ -44,5 +45,7 @@ module LucidIntercom
     param :app_id
     # @return [String] the snakecased app name, e.g. 'smart_order_tags'
     param :app_prefix
+    # @return [Integer]
+    param :admin_id
   end
 end

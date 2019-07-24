@@ -16,5 +16,6 @@ module LucidIntercom
   Container.register(:notify_uninstalled) { NotifyUninstalled.new }
   Container.register(:post_request) { PostRequest.new }
   Container.register(:render_snippet) { RenderSnippet.new }
+  Container.register(:send_email) { SendEmail.new }
   Container.register(:update_user) { UpdateUser.new }
 end
