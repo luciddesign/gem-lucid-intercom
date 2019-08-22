@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'dry/initializer'
+require 'dry/struct'
 
 module LucidIntercom
   autoload :Attributes, 'lucid_intercom/attributes.rb'
@@ -19,7 +20,10 @@ module LucidIntercom
   autoload :Response, 'lucid_intercom/response.rb'
   autoload :SendEmail, 'lucid_intercom/send_email.rb'
   autoload :SendMessage, 'lucid_intercom/send_message.rb'
+  autoload :Types, 'lucid_intercom/types.rb'
   autoload :UpdateUser, 'lucid_intercom/update_user.rb'
   autoload :UserAttributes, 'lucid_intercom/user_attributes.rb'
   autoload :VERSION, 'lucid_intercom/version.rb'
 end
+
+require 'lucid_intercom/config'

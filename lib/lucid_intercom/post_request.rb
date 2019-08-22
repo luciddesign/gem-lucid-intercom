@@ -19,7 +19,7 @@ module LucidIntercom
     #
     def call(path, data)
       res = @http.headers(
-        'Authorization' => "Bearer #{LucidIntercom.access_token}",
+        'Authorization' => "Bearer #{LucidIntercom.config.access_token}",
         'Accept' => 'application/json',
         'Content-Type' => 'application/json'
       ).post("https://api.intercom.io/#{path}", json: data)

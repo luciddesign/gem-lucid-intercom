@@ -64,7 +64,7 @@ module LucidIntercom
     #   event :changed_plan
     #
     def self.event(name)
-      define_method(:name) { "#{LucidIntercom.app_prefix}_#{name}" }
+      define_method(:name) { "#{LucidIntercom.config.app_prefix}_#{name}" }
 
       private :name
     end

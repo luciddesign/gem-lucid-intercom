@@ -12,9 +12,10 @@ end
 
 require 'lucid_intercom'
 
-LucidIntercom.config = LucidIntercom::Config.new(
-  'fake',
-  'fake',
-  'fake',
-  'fake'
+LucidIntercom.configure(
+  access_token: 'fake',
+  admin_id: 123,
+  app_id: 'fake',
+  app_prefix: 'fake',
+  secret: 'fake',
 )

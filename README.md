@@ -14,15 +14,24 @@ Usage
 
 ### Configure the default API credentials
 
-    LucidIntercom.config = LucidIntercom::Config.new(
-      '...', # access_token
-      '...', # secret
-      '...', # app_id
-      '...', # app_prefix
-      123456 # admin_id
+    LucidIntercom.configure(
+      access_token: '...',
+      admin_id: 123456,
+      app_id: '...',
+      app_prefix: '...',
+      secret: '...',
     )
 
-Here, ‘app_prefix’ is the snakecased app name, e.g. ‘smart_order_tags’
+Here, ‘app_prefix’ is the snakecased app name, e.g. ‘smart_order_tags’.
+
+Alternatively load the configuration from a Ruby file. The Ruby
+file is evaluated and should return a hash.
+
+    LucidIntercom.configure_from_file('config/intercom.rb') # the default path
+
+When loading from a file, any environment variables matching the
+upcased key with the prefix ‘INTERCOM_’ will override values in the
+file. For example ‘INTERCOM_APP_ID=...’.
 
 
 ### Render the browser snippet

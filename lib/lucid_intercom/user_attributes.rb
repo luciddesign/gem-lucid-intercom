@@ -43,7 +43,7 @@ module LucidIntercom
     # @return [String]
     #
     private def user_hash(email)
-      OpenSSL::HMAC.hexdigest('sha256', LucidIntercom.secret, email)
+      OpenSSL::HMAC.hexdigest('sha256', LucidIntercom.config.secret, email)
     end
   end
 end

@@ -1,51 +1,48 @@
 # frozen_string_literal: true
 
-require 'forwardable'
-
 require 'lucid_intercom'
+require 'lucid_utils'
 
 module LucidIntercom
   NotConfiguredError = Class.new(Error)
 
   class << self
-    extend Forwardable
+    #
+    # @param options [Hash]
+    #
+    # @return [Config]
+    #
+    def configure(options = {})
+      @config = Config.new(
+        **@config.to_h.compact,
+        **options,
+      )
+    end
 
-    def_delegators(
-      :config,
-      :access_token,
-      :secret,
-      :app_id,
-      :app_prefix,
-      :admin_id # for messages/emails
-    )
+    #
+    # @param path [String]
+    #
+    # @return [Config]
+    #
+    def configure_from_file(path = 'config/intercom.rb')
+      options = LucidUtils::ConfigFromFile.new.(path, env_prefix: 'intercom')
 
-    # @param config [Config]
-    attr_writer :config
+      configure(options)
+    end
 
     #
     # @return [Config]
     #
-    # @raise [NotConfiguredError] if config is unset
-    #
     def config
-      raise NotConfiguredError unless @config
-
-      @config
+      @config ||= configure
     end
   end
 
-  class Config
-    extend Dry::Initializer
-
-    # @return [String]
-    param :access_token
-    # @return [String]
-    param :secret
-    # @return [String]
-    param :app_id
-    # @return [String] the snakecased app name, e.g. 'smart_order_tags'
-    param :app_prefix
-    # @return [Integer]
-    param :admin_id
+  class Config < Dry::Struct
+    attribute :access_token, Types::String
+    attribute :admin_id, Types::Integer
+    attribute :app_id, Types::String
+    attribute :app_prefix, Types::String # the snakecased app name, e.g. 'smart_order_tags'
+    attribute :secret, Types::String
   end
 end

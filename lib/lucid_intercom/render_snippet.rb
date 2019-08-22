@@ -32,7 +32,7 @@ module LucidIntercom
     #
     private def unauthenticated_settings
       {
-        app_id: LucidIntercom.app_id,
+        app_id: LucidIntercom.config.app_id,
       }
     end
 

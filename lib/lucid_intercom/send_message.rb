@@ -21,7 +21,7 @@ module LucidIntercom
         body: body,
         from: {
           type: 'admin',
-          id: LucidIntercom.admin_id,
+          id: LucidIntercom.config.admin_id,
         },
         to: {
           type: 'user',

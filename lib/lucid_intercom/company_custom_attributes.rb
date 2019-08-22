@@ -34,7 +34,7 @@ module LucidIntercom
     # @return [Hash]
     #
     private def app
-      prefix = LucidIntercom.app_prefix
+      prefix = LucidIntercom.config.app_prefix
 
       app_data.each_with_object({}) do |(k, v), h|
         h["#{prefix}_#{k}"] = v

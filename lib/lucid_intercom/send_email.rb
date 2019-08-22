@@ -24,7 +24,7 @@ module LucidIntercom
         template: 'plain',
         from: {
           type: 'admin',
-          id: LucidIntercom.admin_id,
+          id: LucidIntercom.config.admin_id,
         },
         to: {
           type: 'user',
